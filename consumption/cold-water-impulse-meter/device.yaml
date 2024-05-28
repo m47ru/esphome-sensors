@@ -38,7 +38,7 @@ esphome:
     
 light:
   - platform: status_led
-    name: "Status LED"
+    name: "${friendlyname} LED"
     id: esp_status_led
     icon: "mdi:alarm-light"
     pin:
