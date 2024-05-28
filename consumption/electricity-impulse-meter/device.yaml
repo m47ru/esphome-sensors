@@ -1,0 +1,20 @@
+sensor:
+  - platform: pulse_counter
+    pin: GPIO25
+    unit_of_measurement: 'W'
+    name: 'Electricity flow'
+    accuracy_decimals: 0
+    update_interval: 20s
+    count_mode:
+      rising_edge: DISABLE
+      falling_edge: INCREMENT
+    filters:
+      - lambda: return x * ((60.0 / 3200) * 100.0);
+    total:
+      unit_of_measurement: 'kWh'
+      name: 'Electricity total'
+      accuracy_decimals: 3
+      device_class: energy
+      state_class: total_increasing
+      filters:
+        - lambda: return x * (1.0 / 3200);
