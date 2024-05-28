@@ -1,5 +1,5 @@
 substitutions:
-  devicename: esp-cold-water-impulse-meter
+  devicename: esp32-cold-water
   friendlyname: ESP32 Cold water meter
   sensorname: Cold water
   sensorrate: '553000'
