@@ -1,0 +1,19 @@
+  - platform: pulse_counter
+    pin: GPIO27
+    unit_of_measurement: 'L/min'
+    name: 'Cold water flow'
+    accuracy_decimals: 3
+    update_interval: 20s
+    count_mode:
+      rising_edge: DISABLE
+      falling_edge: INCREMENT
+    filters:
+      - lambda: return x * ((1.0 / 553000) * 1000);
+    total:
+      unit_of_measurement: 'm³'
+      name: 'Cold water total'
+      accuracy_decimals: 3
+      device_class: water
+      state_class: total_increasing
+      filters:
+        - lambda: return x * (1.0 / 553000);
