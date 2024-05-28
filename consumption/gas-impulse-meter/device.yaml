@@ -1,20 +1,68 @@
+substitutions:
+  devicename: esp-gas-impulse-meter
+  friendlyname: ESP32 Gas meter
+  sensorname: Gas
+  sensorrate: '1000'
+  sensorpin: GPIO01
+  sensorupdates: 20s
+
+esp32:
+  board: esp32-c3-devkitm-1
+  variant: ESP32C3
+  framework:
+    type: esp-idf
+
+#logger:
+
+wifi:
+#  ssid: !secret wifi_ssid
+#  password: !secret wifi_password
+  ap:
+    ssid: "${devicename}"
+    password: "12345678"
+
+captive_portal:
+
+#api:
+#  encryption:
+#    key: !secret encryption_key
+
+web_server:
+  port: 80
+
+ota:
+
+esphome:
+  name: ${devicename}
+  friendly_name: "${friendlyname}"
+    
+light:
+  - platform: status_led
+    name: "${friendlyname} LED"
+    id: esp_status_led
+    icon: "mdi:alarm-light"
+    pin:
+      number: GPIO8
+      inverted: true
+    restore_mode: ALWAYS_OFF
+
 sensor:
   - platform: pulse_counter
-    pin: GPIO17
+    pin: ${sensorpin}
     unit_of_measurement: 'L/min'
-    name: 'Gas flow'
+    name: '${sensorname} FLOW'
     accuracy_decimals: 3
-    update_interval: 20s
+    update_interval: ${sensorupdates}
     count_mode:
       rising_edge: DISABLE
       falling_edge: INCREMENT
     filters:
-      - lambda: return x * ((1.0 / 1000) * 1000);
+      - lambda: return x * ((1.0 / {"$sensorrate"}) * 1000);
     total:
       unit_of_measurement: 'm³'
-      name: 'Gas total'
+      name: '${sensorname} TOTAL'
       accuracy_decimals: 3
-      device_class: gas
+      device_class: water
       state_class: total_increasing
       filters:
-        - lambda: return x * (1.0 / 1000);
+        - lambda: return x * (1.0 / {"$sensorrate"});
