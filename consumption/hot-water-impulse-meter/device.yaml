@@ -1,5 +1,5 @@
 substitutions:
-  devicename: esp-hot-water-impulse-meter
+  devicename: esp32-hot-water
   friendlyname: ESP32 Hot water meter
   sensorname: Hot water
   sensorrate: '553000'
