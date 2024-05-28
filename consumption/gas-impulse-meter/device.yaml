@@ -1,5 +1,5 @@
 substitutions:
-  devicename: esp-gas-impulse-meter
+  devicename: esp32-gas
   friendlyname: ESP32 Gas meter
   sensorname: Gas
   sensorrate: '1000'
