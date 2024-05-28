@@ -62,7 +62,7 @@ sensor:
       unit_of_measurement: 'm³'
       name: '${sensorname} TOTAL'
       accuracy_decimals: 3
-      device_class: water
+      device_class: gas
       state_class: total_increasing
       filters:
         - lambda: return x * (1.0 / {"$sensorrate"});
